@@ -12,3 +12,12 @@ except IOError:
 finally:
     file.close()
 
+print("Wybierz kryterium zatrzymania:")
+print("1. Spelnienie warunku nalozonego na dokladnosc")
+print("2. Osiagniecie zadanej liczby iteracji")
+stopChoice = input()
+if stopChoice == 1:
+    epsilon = input("Podaj epsilon: ")
+if stopChoice == 2:
+    counter = input("Podaj liczbe iteracji: ")
+
