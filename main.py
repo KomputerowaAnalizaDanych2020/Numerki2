@@ -54,15 +54,15 @@ def MDivide(matrix_to_split):
     #print(U)
     return L,D,U
 def multiply_matrixes(A,B):
-    res = [[0 for x in range(len(A[0]))] for y in range(len(B))]
+    multiplied = [[0 for x in range(len(A[0]))] for y in range(len(B))]
 
     # explicit for loops
     for i in range(len(A)):
         for j in range(len(B[0])):
             for k in range(len(B)):
                 # resulted matrix
-                res[i][j] += A[i][k] * B[k][j]
-    return res
+                multiplied[i][j] += A[i][k] * B[k][j]
+    return multiplied
 with open('macierz.txt', 'r') as f:
     matrix = [[int(num) for num in line.split(',')] for line in f]
 #print(matrix)
