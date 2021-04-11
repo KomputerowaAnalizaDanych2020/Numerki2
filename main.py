@@ -35,7 +35,7 @@ def MDivide(matrix_to_split):
     L = matrix_create(matrix_to_split)
     D = matrix_create(matrix_to_split)
     U = matrix_create(matrix_to_split)
-    print(matrix_to_split)
+    #print(matrix_to_split)
     for row in range(len(matrix_to_split)):
 
         for col in range(len(matrix_to_split[0])):
@@ -63,24 +63,40 @@ def multiply_matrixes(A,B):
                 # resulted matrix
                 multiplied[i][j] += A[i][k] * B[k][j]
     return multiplied
+
+def get_result(M,power,res):
+    arguments=[0]*len(M)
+    for i in range (len(M)):
+        x=res[i]
+        for col in range (len(M[i])):
+            if M[i][col] != 0:
+                x=+col*pow(arguments_list[col],power)
+        arguments[i]=x
+    return arguments
 with open('macierz.txt', 'r') as f:
     matrix = [[int(num) for num in line.split(',')] for line in f]
 #print(matrix)
+arguments_list = [0]*len(matrix)
 equ, res = equ_and_res(matrix)
 lmat , dmat, umat = MDivide(equ)
 
 added=add_matrixes(lmat,umat)
 matrix_minus_one_pow(dmat)
-result=multiply_matrixes(dmat,added)
+resultmat=multiply_matrixes(dmat,added)
 
 #print(equ)
 #print(res)
 #print(matrix_create(equ))
-print(lmat)
-print(dmat)
-print(umat)
-print(added)
-print(result)
+#print(lmat)
+#print(dmat)
+#print(umat)
+#print(added)
+#print(resultmat)
+#print(get_result(resultmat,0,res))
+for i in range(10):
+    arguments_list=get_result(resultmat,i,res)
+print(arguments_list)
+
 
 
 
