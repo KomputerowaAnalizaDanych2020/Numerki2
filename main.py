@@ -61,16 +61,24 @@ def multiply_matrixes(A,B):
         for j in range(len(B[0])):
             for k in range(len(B)):
                 # resulted matrix
-                multiplied[i][j] += A[i][k] * B[k][j]
+                multiplied[i][j] -= A[i][k] * B[k][j]
     return multiplied
+def matrix_vector(A,B):
+    vector=[0]*len(A)
+    for i in range(len(A)):
+        for j in range(len(A[0])):
+            vector[i]+=B[i]*A[i][j]
+    return vector
 
-def get_result(M,power,res):
+
+
+def get_result(M,res):
     arguments=[0]*len(M)
     for i in range (len(M)):
-        x=res[i]
+        x=qmat[i]
         for col in range (len(M[i])):
             if M[i][col] != 0:
-                x=+col*pow(arguments_list[col],power)
+                x+=M[i][col]*arguments_list[col]
         arguments[i]=x
     return arguments
 with open('macierz.txt', 'r') as f:
@@ -85,17 +93,21 @@ matrix_minus_one_pow(dmat)
 resultmat=multiply_matrixes(dmat,added)
 
 #print(equ)
-#print(res)
+
 #print(matrix_create(equ))
 #print(lmat)
-#print(dmat)
+print(dmat)
 #print(umat)
-#print(added)
-#print(resultmat)
+print(added)
+print(resultmat)
+print(res)
+qmat=matrix_vector(dmat,res)
 #print(get_result(resultmat,0,res))
-for i in range(10):
-    arguments_list=get_result(resultmat,i,res)
+print(qmat)
+for i in range(100):
+    arguments_list=get_result(resultmat,res)
 print(arguments_list)
+#print(res)
 
 
 
