@@ -125,6 +125,7 @@ if check_dominant(equ):
     while counter > 0 and epsilon < delta(arguments_list, res, equ):
         arguments_list = get_result(resultmat, res)
         counter -= 1
+    print("Otrzymane przybliżenia x: ")
     print(arguments_list)
 else:
     print("Macierz nie jest macierza dominującą przekątniowo")
