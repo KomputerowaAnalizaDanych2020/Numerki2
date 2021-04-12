@@ -104,7 +104,7 @@ print(res)
 qmat=matrix_vector(dmat,res)
 #print(get_result(resultmat,0,res))
 print(qmat)
-for i in range(100):
+for i in range(24):
     arguments_list=get_result(resultmat,res)
 print(arguments_list)
 #print(res)
