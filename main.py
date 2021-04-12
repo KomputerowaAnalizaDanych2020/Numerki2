@@ -78,13 +78,21 @@ def check_dominant(matrix_to_check):
         for j in range (len(matrix_to_check[0])):
             if (i!=j):
                 rows[i]+=matrix_to_check[i][j]
+                print(rows)
                 columns[j]+=matrix_to_check[i][j]
     for i in range(len(matrix_to_check)):
         if (matrix_to_check[i][i]<columns[i]):
+            print("kolumna "+str(i))
+
             return False
         if (matrix_to_check[i][i] < rows[i]):
+            print("wiersz "+str(i))
+            print(matrix_to_check[i][i])
+            print(rows[i])
             return False
     return True
+def delta(arguments,expected,equations):
+    arg
 
 print("Rozwiazywanie ukladu N rownan liniowych z N niewiadomymi za pomoca metody iteracyjnej Jacobiego")
 # Podanie funkcji jako odczyt z pliku
@@ -97,16 +105,16 @@ if stopChoice == 1:
 if stopChoice == 2:
     counter = input("Podaj liczbe iteracji: ")
 with open('macierz.txt', 'r') as f:
-    matrix = [[int(num) for num in line.split(',')] for line in f]
-if(check_dominant(matrix)):
+    matrix = [[float(num) for num in line.split(',')] for line in f]
+equ, res = equ_and_res(matrix)
+if(check_dominant(equ)):
     arguments_list = [0] * len(matrix)
-    equ, res = equ_and_res(matrix)
     lmat, dmat, umat = MDivide(equ)
     added = add_matrixes(lmat, umat)
     matrix_minus_one_pow(dmat)
     resultmat = multiply_matrixes(dmat, added)
     qmat = matrix_vector(dmat, res)
-    for i in range(24):
+    for i in range(5):
         arguments_list = get_result(resultmat, res)
     print(arguments_list)
 else:
