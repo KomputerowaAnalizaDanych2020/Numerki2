@@ -81,32 +81,52 @@ def get_result(M,res):
                 x+=M[i][col]*arguments_list[col]
         arguments[i]=x
     return arguments
+
+def check_dominant(matrix_to_check):
+    columns=[0]*len(matrix_to_check[0])
+    rows = [0] * len(matrix_to_check)
+
+    for i in range(len(matrix_to_check)):
+        for j in range (len(matrix_to_check[0])):
+            if (i!=j):
+                rows[i]+=matrix_to_check[i][j]
+                columns[j]+=matrix_to_check[i][j]
+    for i in range(len(matrix_to_check)):
+        if (matrix_to_check[i][i]<columns[i]):
+            return False
+        if (matrix_to_check[i][i] < rows[i]):
+            return False
+    return True
+
+print("Rozwiazywanie ukladu N rownan liniowych z N niewiadomymi za pomoca metody iteracyjnej Jacobiego")
+# Podanie funkcji jako odczyt z pliku
+print("Wybierz kryterium zatrzymania:")
+print("1. Spelnienie warunku nalozonego na dokladnosc")
+print("2. Osiagniecie zadanej liczby iteracji")
+stopChoice = input()
+if stopChoice == 1:
+    epsilon = input("Podaj epsilon: ")
+if stopChoice == 2:
+    counter = input("Podaj liczbe iteracji: ")
 with open('macierz.txt', 'r') as f:
     matrix = [[int(num) for num in line.split(',')] for line in f]
-#print(matrix)
-arguments_list = [0]*len(matrix)
-equ, res = equ_and_res(matrix)
-lmat , dmat, umat = MDivide(equ)
-
-added=add_matrixes(lmat,umat)
-matrix_minus_one_pow(dmat)
-resultmat=multiply_matrixes(dmat,added)
-
-#print(equ)
-
-#print(matrix_create(equ))
-#print(lmat)
-print(dmat)
-#print(umat)
-print(added)
-print(resultmat)
-print(res)
-qmat=matrix_vector(dmat,res)
+if(check_dominant(matrix)):
+    arguments_list = [0] * len(matrix)
+    equ, res = equ_and_res(matrix)
+    lmat, dmat, umat = MDivide(equ)
+    added = add_matrixes(lmat, umat)
+    matrix_minus_one_pow(dmat)
+    resultmat = multiply_matrixes(dmat, added)
+    qmat = matrix_vector(dmat, res)
+    for i in range(24):
+        arguments_list = get_result(resultmat, res)
+    print(arguments_list)
+else:
+    print("Macierz nie jest macierza dominującą przekątniowo")
 #print(get_result(resultmat,0,res))
-print(qmat)
-for i in range(24):
-    arguments_list=get_result(resultmat,res)
-print(arguments_list)
+#print(qmat)
+
+
 #print(res)
 
 
