@@ -31,36 +31,24 @@ def matrix_minus_one_pow(matrix):
                 matrix[row][col]=1/matrix[row][col]
     return matrix
 def MDivide(matrix_to_split):
-    #print(matrix_to_split)
     L = matrix_create(matrix_to_split)
     D = matrix_create(matrix_to_split)
     U = matrix_create(matrix_to_split)
-    #print(matrix_to_split)
     for row in range(len(matrix_to_split)):
-
         for col in range(len(matrix_to_split[0])):
             if row == col:
                 D[row][col] = matrix_to_split[row][col]
             elif row > col:
                 L[row][col] = matrix_to_split[row][col]
             elif col > row:
-                #print(row)
-                #print(col)
-                #print(matrix_to_split[row][col])
                 U[row][col] = matrix_to_split[row][col]
-                #print(U)
-    #print(L)
-    #print(D)
-    #print(U)
     return L,D,U
 def multiply_matrixes(A,B):
     multiplied = [[0 for x in range(len(A[0]))] for y in range(len(B))]
 
-    # explicit for loops
     for i in range(len(A)):
         for j in range(len(B[0])):
             for k in range(len(B)):
-                # resulted matrix
                 multiplied[i][j] -= A[i][k] * B[k][j]
     return multiplied
 def matrix_vector(A,B):
@@ -123,11 +111,6 @@ if(check_dominant(matrix)):
     print(arguments_list)
 else:
     print("Macierz nie jest macierza dominującą przekątniowo")
-#print(get_result(resultmat,0,res))
-#print(qmat)
-
-
-#print(res)
 
 
 
