@@ -1,4 +1,4 @@
-
+#stwórz macierz zerową, odpowiadającej wielkości macierzy zadanej
 def matrix_create(matrix_given):
     x_dim = len(matrix_given)
     y_dim = len(matrix_given[0])
@@ -6,6 +6,7 @@ def matrix_create(matrix_given):
     return matrix_of_zeros
 
 
+#rozdziel macierz równań i wyników na 2 odzielne
 def equ_and_res(given_matrix):
     results = []
     equations = []
@@ -15,6 +16,7 @@ def equ_and_res(given_matrix):
     return equations, results
 
 
+#dodaje 2 macierze
 def add_matrixes(A, B):
     result_matrix = matrix_create(A)
     for row in range(len(A)):
@@ -23,6 +25,7 @@ def add_matrixes(A, B):
     return result_matrix
 
 
+#podnosi macierz do potęgi ^-1
 def matrix_minus_one_pow(matrix):
     for row in range(len(matrix)):
         for col in range(len(matrix[0])):
@@ -31,6 +34,7 @@ def matrix_minus_one_pow(matrix):
     return matrix
 
 
+#zwraca macierz dolna macierz trojkatna, gorna macierz trójkątną oraz macierz diagonalna z zadanej macierzy
 def MDivide(matrix_to_split):
     L = matrix_create(matrix_to_split)
     D = matrix_create(matrix_to_split)
@@ -46,6 +50,7 @@ def MDivide(matrix_to_split):
     return L, D, U
 
 
+#mnoży 2 macierze
 def multiply_matrixes(A,B):
     multiplied = [[0 for x in range(len(A[0]))] for y in range(len(B))]
 
@@ -56,6 +61,7 @@ def multiply_matrixes(A,B):
     return multiplied
 
 
+#mnoży wektor razy macierz
 def matrix_vector(A, B):
     vector=[0]*len(A)
     for i in range(len(A)):
@@ -64,8 +70,9 @@ def matrix_vector(A, B):
     return vector
 
 
+#algorytm metody Jakobiego
 def get_result(M,res):
-    arguments = [0]*len(M)
+    arguments = [0]*len(M)      #startowy wektor 0
     for i in range(len(M)):
         x = qmat[i]
         for col in range(len(M[i])):
@@ -75,6 +82,7 @@ def get_result(M,res):
     return arguments
 
 
+#sprawdzenie czy zadana macierz jest silnie diagonalna
 def check_dominant(matrix_to_check):
     columns = [0]*len(matrix_to_check[0])
     rows = [0] * len(matrix_to_check)
@@ -92,6 +100,7 @@ def check_dominant(matrix_to_check):
     return True
 
 
+#funkcja licząca bląd bezwzgledny
 def delta(arguments,expected,equations):
     errors = 0
     for row in range(len(equations)):
@@ -116,8 +125,8 @@ with open('macierz.txt', 'r') as f:
     matrix = [[float(num) for num in line.split(',')] for line in f]
 equ, res = equ_and_res(matrix)
 if check_dominant(equ):
-    arguments_list = [0] * len(matrix)
-    lmat, dmat, umat = MDivide(equ)
+    arguments_list = [0] * len(matrix)              #początkowe przyblizenie
+    lmat, dmat, umat = MDivide(equ)                 # L D U
     added = add_matrixes(lmat, umat)
     matrix_minus_one_pow(dmat)
     resultmat = multiply_matrixes(dmat, added)
