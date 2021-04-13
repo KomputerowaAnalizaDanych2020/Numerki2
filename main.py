@@ -72,12 +72,12 @@ def matrix_vector(A, B):
 
 #algorytm metody Jakobiego
 def get_result(M,res):
-    arguments = [0]*len(M)      #startowy wektor 0
+    arguments = [0]*len(M)      #inicjalizacja listy
     for i in range(len(M)):
         x = qmat[i]
         for col in range(len(M[i])):
             if M[i][col] != 0:
-                x += M[i][col]*arguments_list[col]
+                x += M[i][col]*arguments_list[col]          #wzór (1)
         arguments[i] = x
     return arguments
 
@@ -129,10 +129,10 @@ equ, res = equ_and_res(matrix)
 if check_dominant(equ):
     arguments_list = [0] * len(matrix)              #początkowe przyblizenie
     lmat, dmat, umat = MDivide(equ)                 # L D U
-    added = add_matrixes(lmat, umat)
-    matrix_minus_one_pow(dmat)
-    resultmat = multiply_matrixes(dmat, added)
-    qmat = matrix_vector(dmat, res)
+    added = add_matrixes(lmat, umat)                # L+U
+    matrix_minus_one_pow(dmat)                      #wzor (2)
+    resultmat = multiply_matrixes(dmat, added)      #wzór (3)
+    qmat = matrix_vector(dmat, res)                 #wzór (4)
     while counter > 0 and epsilon < delta(arguments_list, res, equ):
         arguments_list = get_result(resultmat, res)
         counter -= 1
