@@ -111,12 +111,12 @@ def delta(arguments,expected,equations):
     return errors
 
 print("Rozwiazywanie ukladu N rownan liniowych z N niewiadomymi za pomoca metody iteracyjnej Jacobiego")
+print("podaj nazwe pliku z rownaniem")
+path= input()
 print("Wybierz kryterium zatrzymania:")
 print("1. Spelnienie warunku nalozonego na dokladnosc")
 print("2. Osiagniecie zadanej liczby iteracji")
 stopChoice = input()
-print("podaj nazwe pliku z rownaniem")
-path= input()
 counter = 10000000
 epsilon=0.0000000000000001
 if stopChoice == "1":
