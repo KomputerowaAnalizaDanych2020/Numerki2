@@ -115,13 +115,15 @@ print("Wybierz kryterium zatrzymania:")
 print("1. Spelnienie warunku nalozonego na dokladnosc")
 print("2. Osiagniecie zadanej liczby iteracji")
 stopChoice = input()
+print("podaj nazwe pliku z rownaniem")
+path= input()
 counter = 10000000
 epsilon=0.0000000000000001
 if stopChoice == "1":
     epsilon = float(input("Podaj epsilon: "))
 if stopChoice == "2":
     counter = int(input("Podaj liczbe iteracji: "))
-with open('macierz.txt', 'r') as f:
+with open(path, 'r') as f:
     matrix = [[float(num) for num in line.split(',')] for line in f]
 equ, res = equ_and_res(matrix)
 if check_dominant(equ):
